@@ -19,5 +19,5 @@
             </p>
 		</article>
 
-	<?php endwhile; endif; ?>
+	<?php endwhile; endif;?>
 <?php get_footer(); ?>

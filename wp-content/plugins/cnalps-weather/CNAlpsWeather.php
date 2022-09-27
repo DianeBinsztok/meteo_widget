@@ -25,37 +25,41 @@ function __construct() {
    // Affichage du widget sur le rendu de la page
 public function widget( $args, $instance ) {
 
+	// Sert à récupérer les méthodes '$before_widget' et '$after_widget'
+	// Sinon, il faudra les appeler comme ça: $args['before_widget']
 	extract( $args );
 	
 
 	// Check the widget options
 	$title = isset( $instance['title'] ) ? apply_filters( 'widget_title', $instance['title'] ) : '';
-	$contry = isset( $instance['country'] ) ? $instance['country'] : '';
+	$iconUrl = "";
+	$country = isset( $instance['country'] ) ? $instance['country'] : '';
 	$city = isset( $instance['city'] ) ?$instance['city'] : '';
 
-	// WordPress core before_widget hook (always include )
+	// WordPress core before_widget hook (always include)
 	echo $before_widget;
 
 
-   echo '<aside class="widget-text wp_widget_plugin_box">';
+
+   echo '<aside id="meteo-widget-container" class="widget-text wp_widget_plugin_box">';
 		// Display widget title if defined
-		if ( $title ) {
-			echo '<h4>'. $before_title . $title . $after_title.'</h4></br>';
-		}else{
-			echo '<h4>Météo</h4></br>';
-		}
+
+			echo '<h4>Météo:</h4></br>';
+			echo '<img id="widget-icon"/>';
+		
 
 		// Display text field
-		if ( $contry ) {
-			echo '<p>' . $contry . '</p>';
+		if ( $country) {
+			echo '<p id="widget-country-name">' . $country . '</p>';
 		}
 
 		// Display textarea field
 		if ( $city ) {
-			echo '<p>' . $city . '</p>';
+			echo '<p id="widget-city-name">' . $city . '</p>';
 		}
-
+	echo'<script type="text/javascript" src="/wp-content/plugins/cnalps-weather/meteo-widget.js" defer></script>';
 	echo '</aside>';
+
 
 	// WordPress core after_widget hook (always include )
 	echo $after_widget;
@@ -89,8 +93,8 @@ value="<?= esc_attr($country) ?>">
  <input type="text" name="<?= $this->get_field_name('city') ?>" id="<?= $this->get_field_id('city') ?>"
   value="<?= esc_attr($city) ?>">
  </div>
-
  <?php
+ 
 }
  
 
